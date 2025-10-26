@@ -1,134 +1,30 @@
 @extends('layouts.header')
 @extends('layouts.footer')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<!-- Animate.css -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-
-<!-- ================= Styles ================= -->
-<style>
-.btn-outline-primary.active {
-  background-color: #0d6efd;
-  color: white;
-  border-color: #0d6efd;
-}
-.product-card {
-  transition: all 0.3s ease;
-}
-.product-card:hover {
-  transform: translateY(-5px);
-}
-#cartModalBody ul.list-group {
-  max-height: 300px;
-  overflow-y: auto;
-}
-.modal-content {
-  border-radius: 20px !important;
-}
-.modal-header {
-  border-bottom: none;
-}
-.modal-footer {
-  border-top: none;
-}
-
-
-/* Image zoom and smooth transition */
-.slide-img {
-  object-fit: cover;
-  filter: brightness(75%);
-  transition: transform 7s ease-in-out;
-}
-
-.carousel-item.active .slide-img {
-  transform: scale(1.1);
-}
-
-/* Shadow text for better readability */
-.shadow-text {
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
-}
-
-/* Navigation button customization */
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  background-color: rgba(255, 0, 0, 0.8);
-  border-radius: 50%;
-  padding: 15px;
-  transition: 0.3s;
-}
-
-.carousel-control-prev-icon:hover,
-.carousel-control-next-icon:hover {
-  background-color: rgba(255, 50, 50, 1);
-}
-
-/* Caption animation */
-.carousel-caption {
-  bottom: 20%;
-  animation-duration: 1s;
-}
-
-/* Fade transition between slides */
-.carousel.carousel-fade .carousel-item {
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-}
-
-.carousel.carousel-fade .carousel-item.active {
-  opacity: 1;
-}
-</style>
-
-
 <!-- ================= Carousel ================= -->
-<div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000" style="height:70vh; overflow:hidden;">
+<div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" style="height:70vh; overflow:hidden;">
   <div class="carousel-inner h-100">
-
-    <!-- Slide 1 -->
     <div class="carousel-item active h-100">
-      <img src="http://127.0.0.1:8000/storage/customers/HssA767WGmceLhs8NaGu6S9LbTmh4X1uZ2JFoF4p.jpg"
-           class="d-block w-100 h-100 slide-img"
-           alt="Slide 1">
-      <div class="carousel-caption d-none d-md-block animate__animated animate__fadeInUp">
-        <h2 class="fw-bold text-light shadow-text">Welcome to Our Store</h2>
-        <p class="text-light shadow-text">Discover the best deals and quality products</p>
-      </div>
+      <img src="http://127.0.0.1:8000/storage/customers/HssA767WGmceLhs8NaGu6S9LbTmh4X1uZ2JFoF4p.jpg" class="d-block w-100 h-100 animate__animated animate__fadeIn" style="object-fit:cover; transform: scale(1.1); transition: transform 1.5s;">
     </div>
-
-    <!-- Slide 2 -->
     <div class="carousel-item h-100">
-      <img src="http://127.0.0.1:8000/storage/customers/B9exVP1eE2hTBjLqG59NY3ri7uX0i6nE8vTcuEIv.png"
-           class="d-block w-100 h-100 slide-img"
-           alt="Slide 2">
-      <div class="carousel-caption d-none d-md-block animate__animated animate__fadeInUp">
-        <h2 class="fw-bold text-light shadow-text">Fast Delivery & Support</h2>
-        <p class="text-light shadow-text">We deliver your products quickly and safely</p>
-      </div>
+      <img src="http://127.0.0.1:8000/storage/customers/B9exVP1eE2hTBjLqG59NY3ri7uX0i6nE8vTcuEIv.png" class="d-block w-100 h-100 animate__animated animate__fadeIn" style="object-fit:cover; transform: scale(1.1); transition: transform 1.5s;">
     </div>
-
-    <!-- Slide 3 -->
     <div class="carousel-item h-100">
-      <img src="http://127.0.0.1:8000/storage/customers/xnNdP5MpLHr2GMu3UAZ9Xb6lGhsnUVmugsNf9PAV.jpg"
-           class="d-block w-100 h-100 slide-img"
-           alt="Slide 3">
-      <div class="carousel-caption d-none d-md-block animate__animated animate__fadeInUp">
-        <h2 class="fw-bold text-light shadow-text">Your Satisfaction Matters</h2>
-        <p class="text-light shadow-text">Shop smart and experience happiness</p>
-      </div>
+      <img src="http://127.0.0.1:8000/storage/customers/xnNdP5MpLHr2GMu3UAZ9Xb6lGhsnUVmugsNf9PAV.jpg" class="d-block w-100 h-100 animate__animated animate__fadeIn" style="object-fit:cover; transform: scale(1.1); transition: transform 1.5s;">
     </div>
-
   </div>
 
-  <!-- Navigation buttons -->
   <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
+    <span class="carousel-control-prev-icon bg-danger rounded-circle p-3"></span>
   </button>
   <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
+    <span class="carousel-control-next-icon bg-danger rounded-circle p-3"></span>
   </button>
 </div>
-
 <!-- ================= Product Section ================= -->
 <section class="container mt-5">
   <div class="text-center mb-4">
@@ -411,3 +307,53 @@ async function checkout() {
 }
 </script>
 
+<!-- ================= Styles ================= -->
+<style>
+.btn-outline-primary.active {
+  background-color: #0d6efd;
+  color: white;
+  border-color: #0d6efd;
+}
+.product-card {
+  transition: all 0.3s ease;
+}
+.product-card:hover {
+  transform: translateY(-5px);
+}
+#cartModalBody ul.list-group {
+  max-height: 300px;
+  overflow-y: auto;
+}
+.modal-content {
+  border-radius: 20px !important;
+}
+.modal-header {
+  border-bottom: none;
+}
+.modal-footer {
+  border-top: none;
+}
+
+
+.carousel-item img {
+  animation: zoomAnimation 15s ease-in-out infinite;
+}
+
+@keyframes zoomAnimation {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-size: 100% 100%;
+  transition: transform 0.3s;
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+  transform: scale(1.2);
+}
+
+</style>
