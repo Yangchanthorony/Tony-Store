@@ -1,133 +1,413 @@
-@extends('layouts.footer')
 @extends('layouts.header')
+@extends('layouts.footer')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
 
-  <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" style="height: 70vh;">
-  <div class="carousel-inner h-100 ">
-    <div class="carousel-item active h-100 ">
-      <img src="https://scontent.fpnh24-1.fna.fbcdn.net/v/t39.30808-6/516585791_760036426416133_5530547032390674181_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_ohc=ksVUsN6PKwYQ7kNvwElpOSa&_nc_oc=AdmBQst67c2alBiC9q8gqza0-_rQsv-P6P3OAYBla0XL2JAnonO7Rd1omao95TCuMtc&_nc_zt=23&_nc_ht=scontent.fpnh24-1.fna&_nc_gid=be9lgGU5pL5JNoWXlgL3mg&oh=00_AfS0nGyDrvL286LK8ONKt91pWrY_r-OfxXT19XrsIN7rbQ&oe=6871C500" class="d-block w-100 h-100" alt="Featured Product 1" style="object-fit:  contain;">
-      {{-- <div class="carousel-caption d-flex flex-column justify-content-center align-items-center h-100 bg-dark bg-opacity-50">
-        <h1 class="text-white fw-bold mb-2">Discover Our Best Skincare</h1>
-        <p class="text-light">Shop now for radiant skin!</p>
-      </div> --}}
+<!-- ================= Styles ================= -->
+<style>
+.btn-outline-primary.active {
+  background-color: #0d6efd;
+  color: white;
+  border-color: #0d6efd;
+}
+.product-card {
+  transition: all 0.3s ease;
+}
+.product-card:hover {
+  transform: translateY(-5px);
+}
+#cartModalBody ul.list-group {
+  max-height: 300px;
+  overflow-y: auto;
+}
+.modal-content {
+  border-radius: 20px !important;
+}
+.modal-header {
+  border-bottom: none;
+}
+.modal-footer {
+  border-top: none;
+}
+
+
+/* Image zoom and smooth transition */
+.slide-img {
+  object-fit: cover;
+  filter: brightness(75%);
+  transition: transform 7s ease-in-out;
+}
+
+.carousel-item.active .slide-img {
+  transform: scale(1.1);
+}
+
+/* Shadow text for better readability */
+.shadow-text {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* Navigation button customization */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(255, 0, 0, 0.8);
+  border-radius: 50%;
+  padding: 15px;
+  transition: 0.3s;
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+  background-color: rgba(255, 50, 50, 1);
+}
+
+/* Caption animation */
+.carousel-caption {
+  bottom: 20%;
+  animation-duration: 1s;
+}
+
+/* Fade transition between slides */
+.carousel.carousel-fade .carousel-item {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.carousel.carousel-fade .carousel-item.active {
+  opacity: 1;
+}
+</style>
+
+
+<!-- ================= Carousel ================= -->
+<div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000" style="height:70vh; overflow:hidden;">
+  <div class="carousel-inner h-100">
+
+    <!-- Slide 1 -->
+    <div class="carousel-item active h-100">
+      <img src="http://127.0.0.1:8000/storage/customers/HssA767WGmceLhs8NaGu6S9LbTmh4X1uZ2JFoF4p.jpg"
+           class="d-block w-100 h-100 slide-img"
+           alt="Slide 1">
+      <div class="carousel-caption d-none d-md-block animate__animated animate__fadeInUp">
+        <h2 class="fw-bold text-light shadow-text">Welcome to Our Store</h2>
+        <p class="text-light shadow-text">Discover the best deals and quality products</p>
+      </div>
     </div>
-    
-     <div class="carousel-item h-100">
-      <img src="https://scontent.fpnh24-1.fna.fbcdn.net/v/t39.30808-6/514282699_759226336497142_483700815662086342_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=AhYpZRymMdIQ7kNvwGKTuL7&_nc_oc=AdnEEBMz3ETp0ZRoJPq1MsstRCgUevZmLH6fqsLlAXexKigeNNP3Iuaa0rkKZd2VbNo&_nc_zt=23&_nc_ht=scontent.fpnh24-1.fna&_nc_gid=KwBF80QXOmwmq3Zzb7YUSA&oh=00_AfScvUy0WI9SgqLkDftTkQDlLln6p9qzAuiOiFhIb5sE7Q&oe=6871E09A" class="d-block w-100 h-100" alt="Featured Product 3" style="object-fit: contain;">
-      {{-- <div class="carousel-caption d-flex flex-column justify-content-center align-items-center h-100 bg-dark bg-opacity-50">
-        <h1 class="text-white fw-bold mb-2">Nature-Inspired Products</h1>
-        <p class="text-light">Gentle on skin, powerful in results.</p>
-      </div> --}}
-    </div>
 
+    <!-- Slide 2 -->
     <div class="carousel-item h-100">
-      <img src="https://i.pinimg.com/736x/c9/5e/17/c95e170113cf7fa3f3dc4d744a2cebf7.jpg" class="d-block w-100 h-100" alt="Featured Product 2" style="object-fit: contain;">
-      {{-- <div class="carousel-caption d-flex flex-column justify-content-center align-items-center h-100 bg-dark bg-opacity-50">
-        <h1 class="text-white fw-bold mb-2">Top Beauty Picks</h1>
-        <p class="text-light">Glow up with our curated collection.</p>
-      </div> --}}
+      <img src="http://127.0.0.1:8000/storage/customers/B9exVP1eE2hTBjLqG59NY3ri7uX0i6nE8vTcuEIv.png"
+           class="d-block w-100 h-100 slide-img"
+           alt="Slide 2">
+      <div class="carousel-caption d-none d-md-block animate__animated animate__fadeInUp">
+        <h2 class="fw-bold text-light shadow-text">Fast Delivery & Support</h2>
+        <p class="text-light shadow-text">We deliver your products quickly and safely</p>
+      </div>
     </div>
+
+    <!-- Slide 3 -->
+    <div class="carousel-item h-100">
+      <img src="http://127.0.0.1:8000/storage/customers/xnNdP5MpLHr2GMu3UAZ9Xb6lGhsnUVmugsNf9PAV.jpg"
+           class="d-block w-100 h-100 slide-img"
+           alt="Slide 3">
+      <div class="carousel-caption d-none d-md-block animate__animated animate__fadeInUp">
+        <h2 class="fw-bold text-light shadow-text">Your Satisfaction Matters</h2>
+        <p class="text-light shadow-text">Shop smart and experience happiness</p>
+      </div>
+    </div>
+
   </div>
 
+  <!-- Navigation buttons -->
   <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon bg-danger" aria-hidden="true"></span>
-    <span class="visually-hidden ">Previous</span>
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
   </button>
   <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon bg-danger" aria-hidden="true"></span>
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
 </div>
 
+<!-- ================= Product Section ================= -->
+<section class="container mt-5">
+  <div class="text-center mb-4">
+    <h2>Our Products</h2>
+    <p>Discover our bestselling Mexd solutions</p>
+  </div>
 
+  <!-- Category Filters -->
+  <div class="container mb-4">
+    <div class="d-flex flex-wrap justify-content-center gap-2">
+      <button class="btn btn-outline-primary active" onclick="filterProducts('all', event)">All</button>
+      @foreach ($categories as $cat)
+        <button class="btn btn-outline-primary" onclick="filterProducts('{{ $cat->category_name }}', event)">
+          {{ $cat->category_name }}
+        </button>
+      @endforeach
+    </div>
+  </div>
 
-  <!-- Products Section -->
-  <section style="margin-top: 30px" class="products" id="products">
-    <div class="container">
-      <div class="section-header text-center mb-4">
-        <h2>Our Products</h2>
-        <p>Discover our bestselling skincare solutions</p>
-      </div>
-
-      <!-- Filter Buttons -->
-      <div class="filter-tabs text-center mb-4">
-        <button class="filter-btn active" data-filter="all">All</button>
-        @php
-          $categories = collect($products)->pluck('category.category_name')->unique();
-        @endphp
-        @foreach ($categories as $category)
-          <button class="filter-btn" data-filter="{{ strtolower($category) }}">{{ $category }}</button>
-        @endforeach
-      </div>
-
-      <!-- Product Grid -->
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 products-grid">
-        @foreach ($products as $product)
-          <div class="col product" data-category="{{ strtolower($product->category->category_name) }}">
-            <div class="card h-100 w-75" data-item="{{ $product->name }}">
-              <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}">
-              <div class="card-body text-center">
-                <h5 class="card-title">{{ $product->name }}</h5>
-                <p class="product-category">{{ $product->category->category_name }}</p>
-                <div class="product-price">${{ number_format($product->price, 2) }}</div>
-                <button class="btn btn-primary mt-2 w-100" onclick="showModal('{{ $product->name }}', {{ $product->price }}, '{{ asset('storage/' . $product->image) }}')">Quick View</button>
-              </div>
-            </div>
+  <!-- Product Grid -->
+  <div class="row row-cols-1 row-cols-md-4 g-4 products-grid">
+    @foreach ($products as $product)
+      <div class="col product-card" data-category="{{ $product->category->category_name ?? 'Uncategorized' }}">
+        <div class="card h-100 shadow-sm border-0">
+          <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}" style="height:200px; object-fit:cover;">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ $product->name }}</h5>
+            <p class="text-secondary small mb-2">{{ Str::limit($product->description, 60) }}</p>
+            <div class="fw-bold text-primary mb-2">${{ number_format($product->price, 2) }}</div>
+            <button class="btn btn-primary w-100 mt-2"
+              onclick="showModal('{{ $product->name }}', {{ $product->price }}, '{{ asset('storage/' . $product->image) }}')">
+              Quick View
+            </button>
           </div>
-        @endforeach
+        </div>
+      </div>
+    @endforeach
+  </div>
+</section>
+
+<!-- ================= Order Modal ================= -->
+<div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header"><h5>Order Confirmation</h5></div>
+      <div class="modal-body text-center">
+        <img id="modalItemImage" src="" class="img-fluid mb-2" style="max-width:100px;">
+        <p id="modalItemName" class="fw-bold"></p>
+        <div class="d-flex justify-content-center align-items-center mb-2">
+          <button class="btn btn-outline-secondary btn-sm" onclick="updateQuantity(-1)">-</button>
+          <span id="modalQuantity" class="mx-2">1</span>
+          <button class="btn btn-outline-secondary btn-sm" onclick="updateQuantity(1)">+</button>
+        </div>
+        <p>Total: $<span id="modalTotalPrice"></span></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+        <button class="btn btn-primary btn-sm" onclick="addToCart()">Add to Cart</button>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- Modal for Order Confirmation -->
-  <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="orderModalLabel">Order Confirmation</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!-- ================= Cart Modal ================= -->
+<div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content shadow-lg border-0 rounded-4">
+      <div class="modal-header bg-primary text-white rounded-top-4">
+        <h5 class="modal-title">🛒 Your Shopping Cart</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body d-flex flex-column gap-3">
+        <div id="cartModalBody">
+          <p class="text-center text-muted my-3">Your cart is empty.</p>
         </div>
-        <div class="modal-body">
-          <img id="modalItemImage" src="" alt="Item Image" class="img-fluid mb-3" style="max-width: 100px;">
-          <p>Item: <span id="modalItemName"></span></p>
-          <div class="quantity-controls">
-            <button class="quantity-btn" onclick="updateQuantity(-1)">-</button>
-            <span id="modalQuantity">1</span>
-            <button class="quantity-btn" onclick="updateQuantity(1)">+</button>
-          </div>
-          <p>Total: $<span id="modalTotalPrice"></span></p>
+
+        <div class="text-center">
+          <h6 class="fw-semibold mb-2">💳 Scan QR Code to Pay</h6>
+          <img src="http://127.0.0.1:8000/storage/customers/Id9NlOLxkII90rWMF7TxnqvleslhRXmKUsMbt3FF.jpg" class="img-fluid rounded shadow-sm" style="max-height:200px;">
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary btn-sm" onclick="addToCart()">Add to Cart</button>
+
+        <div class="border-top pt-3">
+          <label for="uploadImage" class="form-label fw-semibold">Upload Payment Slip</label>
+          <input type="file" id="uploadImage" class="form-control form-control-sm" accept="image/*">
+          <img id="previewImage" src="" class="mt-3 d-none rounded shadow-sm w-100" style="max-height: 250px; object-fit: contain;">
+        </div>
+
+        <div class="border-top pt-3">
+          <h6 class="fw-semibold mb-2">📝 Fill Your Details</h6>
+          <input type="text" id="customerName" class="form-control mb-2" placeholder="Full Name" required>
+          <input type="text" id="customerPhone" class="form-control mb-2" placeholder="Phone Number" required>
+          <textarea id="customerAddress" class="form-control mb-2" rows="2" placeholder="Address" required></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer d-block text-center border-top">
+        <p id="cart-status-message" class="mb-2 small text-muted"></p>
+        <div class="d-flex justify-content-between align-items-center">
+          <button class="btn btn-secondary px-4" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-success px-4" id="checkout-btn-modal" onclick="checkout()">Buy</button>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Modal for View Cart -->
-  <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="cartModalLabel">Your Cart</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body cart-modal-body" id="cartModalBody">
-          <!-- Cart items and summary will be dynamically inserted here -->
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary btn-sm" onclick="checkout()">Checkout</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
- 
-  <!-- Bootstrap JS and Popper.js -->
-  
-</body>
+<!-- ================= Scripts ================= -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="{{asset('assets/js/index.js')}}"></script>
-</html>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<script>
+let cart = [];
+let currentItem = { name: '', price: 0, image: '', quantity: 1 };
+let uploadedFile = null;
+
+// Format currency
+const formatCurrency = n => `$${n.toFixed(2)}`;
+
+function updateCartBadge() {
+  const badge = document.getElementById('cartCount');
+  if (!badge) return;
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  badge.innerText = totalItems > 0 ? totalItems : '';
+  badge.classList.toggle('d-none', totalItems === 0);
+}
+
+function showModal(name, price, image) {
+  currentItem = { name, price, image, quantity: 1 };
+  document.getElementById('modalItemName').innerText = name;
+  document.getElementById('modalItemImage').src = image;
+  document.getElementById('modalQuantity').innerText = 1;
+  document.getElementById('modalTotalPrice').innerText = formatCurrency(price);
+  new bootstrap.Modal('#orderModal').show();
+}
+
+function updateQuantity(change) {
+  currentItem.quantity = Math.max(1, currentItem.quantity + change);
+  document.getElementById('modalQuantity').innerText = currentItem.quantity;
+  document.getElementById('modalTotalPrice').innerText = formatCurrency(currentItem.quantity * currentItem.price);
+}
+
+function addToCart() {
+  const existing = cart.find(i => i.itemName === currentItem.name);
+  if (existing) existing.quantity += currentItem.quantity;
+  else cart.push({ itemName: currentItem.name, price: currentItem.price, image: currentItem.image, quantity: currentItem.quantity });
+
+  bootstrap.Modal.getInstance(document.getElementById('orderModal')).hide();
+  renderCart();
+  updateCartBadge();
+  document.getElementById('cart-status-message').innerHTML = `<span class="text-success">Added ${currentItem.quantity} × ${currentItem.name}!</span>`;
+}
+
+function renderCart() {
+  const body = document.getElementById('cartModalBody');
+  if (cart.length === 0) {
+    body.innerHTML = '<p class="text-center text-muted my-3">Your cart is empty.</p>';
+    document.getElementById('checkout-btn-modal').disabled = true;
+    return;
+  }
+
+  let html = '<ul class="list-group">';
+  let total = 0;
+  cart.forEach(i => {
+    const subtotal = i.price * i.quantity;
+    total += subtotal;
+    html += `
+      <li class="list-group-item d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+          <img src="${i.image}" width="50" height="50" class="me-2 rounded" style="object-fit:cover;">
+          <div>
+            <div class="fw-semibold">${i.itemName}</div>
+            <small class="text-muted">x${i.quantity} × ${formatCurrency(i.price)}</small>
+          </div>
+        </div>
+        <span>${formatCurrency(subtotal)}</span>
+      </li>`;
+  });
+  html += `</ul><p class="mt-2 text-end fw-bold text-danger">Total: ${formatCurrency(total)}</p>`;
+  body.innerHTML = html;
+  document.getElementById('checkout-btn-modal').disabled = !uploadedFile;
+}
+
+function viewCart() {
+  new bootstrap.Modal('#cartModal').show();
+  renderCart();
+}
+
+function filterProducts(category, event) {
+  const cards = document.querySelectorAll('.product-card');
+  const buttons = document.querySelectorAll('.btn-outline-primary');
+  buttons.forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+
+  cards.forEach(card => {
+    const productCategory = card.getAttribute('data-category');
+    card.style.display = (category === 'all' || productCategory === category) ? 'block' : 'none';
+  });
+}
+
+// Preview uploaded payment slip
+document.getElementById('uploadImage').addEventListener('change', e => {
+  const file = e.target.files[0];
+  const preview = document.getElementById('previewImage');
+  if (file) {
+    uploadedFile = file;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      preview.src = ev.target.result;
+      preview.classList.remove('d-none');
+    };
+    reader.readAsDataURL(file);
+    document.getElementById('checkout-btn-modal').disabled = false;
+  }
+});
+
+// Checkout function with required payment slip
+async function checkout() {
+  const btn = document.getElementById('checkout-btn-modal');
+  const msg = document.getElementById('cart-status-message');
+
+  const name = document.getElementById('customerName').value.trim();
+  const phone = document.getElementById('customerPhone').value.trim();
+  const address = document.getElementById('customerAddress').value.trim();
+
+  if (!name || !phone || !address) {
+    msg.innerHTML = '<span class="text-danger">Please fill in your name, phone number, and address!</span>';
+    return;
+  }
+
+  if (cart.length === 0) {
+    msg.innerHTML = '<span class="text-danger">Cart is empty!</span>';
+    return;
+  }
+
+  if (!uploadedFile) {
+    msg.innerHTML = '<span class="text-danger">Please upload a payment slip before checkout!</span>';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerText = 'Sending...';
+  msg.innerText = 'Uploading order...';
+
+  const formData = new FormData();
+  formData.append('cart', JSON.stringify(cart));
+  formData.append('customerName', name);
+  formData.append('customerPhone', phone);
+  formData.append('customerAddress', address);
+  formData.append('image', uploadedFile);
+
+  const csrf = document.querySelector('meta[name="csrf-token"]').content;
+
+  try {
+    const res = await fetch("{{ route('send.telegram') }}", {
+      method: 'POST',
+      headers: { 'X-CSRF-TOKEN': csrf },
+      body: formData
+    });
+
+    const result = await res.json();
+    if (result.status === 'success') {
+      msg.innerHTML = '<span class="text-success">✅ Order sent successfully!</span>';
+      cart = [];
+      renderCart();
+      updateCartBadge();
+      document.getElementById('customerName').value = '';
+      document.getElementById('customerPhone').value = '';
+      document.getElementById('customerAddress').value = '';
+      document.getElementById('previewImage').classList.add('d-none');
+      uploadedFile = null;
+      btn.disabled = true;
+    } else throw new Error(result.details);
+  } catch (err) {
+    msg.innerHTML = `<span class="text-danger">Error: ${err.message}</span>`;
+  } finally {
+    btn.innerText = 'Checkout';
+    if (!uploadedFile) btn.disabled = true;
+  }
+}
+</script>
+
